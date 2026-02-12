@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Mensajes - Ejercicio DOM</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container">
         <!-- Encabezado principal -->
@@ -13,14 +15,15 @@
             <h1 class="header__title">Registro de Mensajes</h1>
             <p class="header__subtitle">Practica la manipulación del DOM en tiempo real</p>
         </header>
-        
+
+        <!-- validacion de usuario -->
         <section class="validation-section">
             <div class="card">
                 <h2 class="card__title">Validación de Usuario</h2>
 
                 <div class="form__group">
-                    <label for="documento" class="form__label">Documento de Usuario</label>
-                    <input type="text" id="documento" class="form__input" name="documento" placeholder="Numero de documento">
+                    <label for="documento" class="form__label">Id de Usuario</label>
+                    <input type="text" id="documento" class="form__input" name="documento" placeholder="Ingresa tu id">
                 </div>
                 <button id="validateBtn" class="btn btn--primary">
                     <span class="btn__text">Validar Usuario</span>
@@ -29,37 +32,45 @@
             </div>
         </section>
 
+        <!-- Mostrar informacion de usuario -->
+        <section id="userInfo" class="validation-section hidden">
+            <div class="card">
+                <h2 class="card__title">Usuario encontrado</h2>
+
+                <div class="user-info__item">
+                    <span class="user-info__label">Nombre:</span>
+                    <span id="userNameDisplay" class="user-info__value"></span>
+                </div>
+
+                <div class="user-info__item">
+                    <span class="user-info__label">Email:</span>
+                    <span id="userEmailDisplay" class="user-info__value"></span>
+                </div>
+            </div>
+        </section>
+
+
+
+
         <!-- Formulario de entrada -->
-        <section class="form-section">
+        <section id="form-section" class="form-section hidden">
             <div class="card">
                 <h2 class="card__title">Nuevo Mensaje</h2>
-                
+
                 <form id="messageForm" class="form" novalidate>
                     <div class="form__group">
                         <label for="userName" class="form__label">
                             Nombre de usuario
                         </label>
-                        <input 
-                            type="text" 
-                            id="userName" 
-                            class="form__input" 
-                            placeholder="Ingresa tu nombre"
-                            aria-required="true"
-                        >
+                        <input type="text" id="userName" class="form__input" placeholder="Ingresa tu nombre"
+                            aria-required="true">
                         <span class="form__error" id="userNameError"></span>
                     </div>
 
                     <div class="form__group">
-                        <label for="userMessage" class="form__label">
-                            Tu mensaje
-                        </label>
-                        <textarea 
-                            id="userMessage" 
-                            class="form__input form__textarea" 
-                            placeholder="Escribe tu mensaje aquí..."
-                            rows="4"
-                            aria-required="true"
-                        ></textarea>
+                        <label for="userMessage" class="form__label"> Tu mensaje </label>
+                        <textarea id="userMessage" class="form__input form__textarea"
+                            placeholder="Escribe tu mensaje aquí..." rows="4" aria-required="true"></textarea>
                         <span class="form__error" id="userMessageError"></span>
                     </div>
 
@@ -72,16 +83,17 @@
         </section>
 
         <!-- Área de mensajes -->
-        <section class="messages-section">
+        <section id="messages-section" class="messages-section hidden">
             <div class="messages-header">
                 <h2 class="messages-header__title">Mensajes Publicados</h2>
                 <span class="messages-header__count" id="messageCount">0 mensajes</span>
             </div>
-            
+
             <div id="messagesContainer" class="messages-container">
                 <!-- Los mensajes se agregarán aquí dinámicamente -->
                 <div class="messages-empty" id="emptyState">
-                    <svg class="messages-empty__icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <svg class="messages-empty__icon" width="64" height="64" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor">
                         <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                     </svg>
                     <p class="messages-empty__text">Aún no hay mensajes</p>
@@ -98,4 +110,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
