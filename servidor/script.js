@@ -293,6 +293,7 @@ function createMessageElement(tituloForm, descripcionForm, estadoForm) {
     // Crea la estructura interna del mensaje
     const timestamp = getCurrentTimestamp();
 
+    // AGREGAR DOS BOTONES (BORRAR & EDITAR)
     messageCard.innerHTML = `
         <div class="message-card__header">
             <div class="message-card__user">
@@ -305,7 +306,11 @@ function createMessageElement(tituloForm, descripcionForm, estadoForm) {
             <p><strong>Descripción:</strong> ${descripcionForm}</p>
             <p><strong>Estado:</strong> ${estadoForm}</p>
         </div>
-    `;
+        <div class="message-card__actions"> 
+        <button class="btn-edit">Editar</button> 
+        <button class="btn-delete">Eliminar</button> 
+        </div>
+        `;
 
     // Inserta el nuevo elemento en el contenedor de mensajes
     messagesContainer.insertBefore(messageCard, messagesContainer.firstChild);
@@ -441,6 +446,8 @@ taskForm.addEventListener("submit", handleTaskSubmit);
 taskTitleInput.addEventListener('input', () => clearError(taskTitleError));
 taskDescriptionInput.addEventListener('input', () => clearError(taskDescriptionError));
 taskStatusInput.addEventListener('change', () => clearError(taskStatusError));
+<<<<<<< HEAD:servidor/script.js
+=======
 
 
 // ============================================
@@ -465,6 +472,7 @@ taskStatusInput.addEventListener('change', () => clearError(taskStatusError));
  * 5. ¿Qué ocurre en la página cada vez que repites la acción?
  *    R: 
  */
+>>>>>>> main:script.js
 
 
 // ============================================
