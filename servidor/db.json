@@ -51,13 +51,5 @@
       "email": "valentina.rios@example.com"
     }
   ],
-  "tasks": [
-    {
-      "id": "7006",
-      "userId": "3",
-      "title": "a",
-      "description": "a",
-      "status": "pendiente"
-    }
-  ]
+  "tasks": []
 }
