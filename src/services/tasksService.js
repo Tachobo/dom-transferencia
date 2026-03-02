@@ -7,6 +7,11 @@ import { filterVoid, renderTasks, tasksNull, updateMessageCounter } from "../ui/
 import { clearError, hideEmpty, showError } from "../ui/uiState.js";
 import { getSelectedValues, isValidInput, processTasks } from "../utils/helpers.js";
 
+/**
+ * Obtiene las tareas pertenecientes a un usuario específico.
+ * @param {number|string} userId - ID del usuario
+ * @returns {Promise<Array>} Lista de tareas del usuario
+ */
 export async function getTasksByUser(userId) {
     const tasks = await fetchTasks();
 
@@ -14,6 +19,11 @@ export async function getTasksByUser(userId) {
     return userTasks
 }
 
+/**
+ * Persiste una tarea nueva usando la API.
+ * @param {Object} task - Objeto tarea a guardar
+ * @returns {Promise<Object>} Respuesta de la API con la tarea creada
+ */
 export async function saveTask(task) {
     return createTask(task);
 }
@@ -100,6 +110,18 @@ export function validateForm(taskTitle, taskDescription, taskStatus, taskTitleEr
     return isValid;
 }
 
+/**
+ * Obtiene las tareas del usuario y aplica el proceso de filtrado y ordenamiento.
+ * - Recupera tareas con `getTasksByUser`
+ * - Determina estados seleccionados y criterio de orden
+ * - Devuelve la lista resultante y actualiza la UI
+ *
+ * @param {NodeList} filterStatus - Checkboxes de estado
+ * @param {HTMLElement} sortTasksArea - Select de orden
+ * @param {HTMLElement} container - Contenedor donde renderizar
+ * @param {Object} currentUser - Usuario actual (tiene `id`)
+ * @returns {Promise<Array>} Lista de tareas resultado del filtrado/orden
+ */
 export async function orderFilter(filterStatus, sortTasksArea, container, currentUser) {
     let tasks = await getTasksByUser(currentUser.id);
 

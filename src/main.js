@@ -1,5 +1,10 @@
 // ---------------------------------------------------------------
 // MAIN - CONTROL TOTAL DE LA APP
+// Archivo de inicialización y control de eventos de la aplicación.
+// - Valida usuarios
+// - Gestiona el formulario de creación de tareas
+// - Aplica filtros y ordenamientos
+// - Exporta las tareas visibles
 // ---------------------------------------------------------------
 
 import { validateUserService } from "./services/userService.js";
@@ -50,6 +55,11 @@ let currentFilteredTasks = []; //guarda lo que ve actualmente en tareas
 hideUserUI(userInfo, form, messages);
 
 // ================= VALIDAR USUARIO =================
+/**
+ * Evento para validar el usuario a partir del ID ingresado.
+ * - Llama a `validateUserService` para obtener datos del usuario
+ * - Si existe, carga las tareas del usuario y renderiza la UI
+ */
 validateBtn.addEventListener("click", async () => {
     const id = documentoInput.value.trim();
 
@@ -99,6 +109,13 @@ validateBtn.addEventListener("click", async () => {
 });
 
 // ================= CREAR TAREA =================
+/**
+ * Maneja el envío del formulario de creación de tareas.
+ * - Valida que exista un usuario validado
+ * - Valida los campos del formulario con `validateForm`
+ * - Construye el objeto tarea y lo persiste con `saveTask`
+ * - Refresca la lista de tareas mostrada
+ */
 taskForm.addEventListener("submit", async e => {
     e.preventDefault();
 
@@ -135,11 +152,19 @@ taskForm.addEventListener("submit", async e => {
 });
 
 // ================= FILTRAR Y ORDENAR =================
+/**
+ * Aplica filtro y orden a las tareas mostradas llamando a
+ * `orderFilter` desde el servicio de tareas.
+ */
 applyFiltersBtn.addEventListener("click", async () => {
     currentFilteredTasks = await orderFilter(filterStatus, sortTasksArea, container, currentUser)
 });
 
 // ================= EXPORTAR TAREAS =================
+/**
+ * Genera y descarga un archivo JSON con las tareas visibles.
+ * - Si hay filtros activos usa `currentFilteredTasks`, si no `tasksUser`.
+ */
 exportTasksBtn.addEventListener("click", () => {
     // Si no se ha filtrado nada, se usa tasksUser, si ya se filtro, se usa currentFilteredTasks
     const dataToExport = currentFilteredTasks.length > 0 ? currentFilteredTasks : tasksUser;

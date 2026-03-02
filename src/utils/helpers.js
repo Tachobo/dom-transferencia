@@ -2,10 +2,19 @@
 // FUNCIONES AUXILIARES REUTILIZABLES
 // ---------------------------------------------------------------
 
+/**
+ * Comprueba si una entrada de texto es válida (no vacía tras trim).
+ * @param {string} value - Texto a validar
+ * @returns {boolean}
+ */
 export function isValidInput(value) {
     return value.trim().length > 0;
 }
 
+/**
+ * Devuelve una cadena con la fecha y hora actual formateada en español.
+ * @returns {string} Fecha formateada (ej. '2 de marzo de 2026, 14:05')
+ */
 export function getCurrentTimestamp() {
     const now = new Date();
     const options = {
@@ -18,6 +27,14 @@ export function getCurrentTimestamp() {
     return now.toLocaleDateString('es-ES', options);
 }
 
+/**
+ * Obtiene las iniciales de un nombre.
+ * - Si el nombre tiene una sola palabra devuelve las dos primeras letras
+ * - Si tiene varias palabras devuelve la primera letra de cada palabra
+ *
+ * @param {string} name - Nombre completo
+ * @returns {string} Iniciales en mayúsculas
+ */
 export function getInitials(name) {
     const trimmedName = name.trim();
     const words = trimmedName.split(/\s+/);
@@ -32,6 +49,11 @@ export function getInitials(name) {
  * Obtiene valores de checkboxes seleccionados
  * @param {NodeList} checkboxes 
  * @returns {Array}
+ */
+/**
+ * Obtiene valores de checkboxes seleccionados
+ * @param {NodeList} checkboxes - NodeList obtenido por querySelectorAll
+ * @returns {Array<string>} Valores de checkboxes marcados
  */
 export const getSelectedValues = (checkboxes) =>
     [...checkboxes].filter(cb => cb.checked).map(cb => cb.value);

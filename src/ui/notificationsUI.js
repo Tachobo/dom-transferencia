@@ -1,7 +1,16 @@
 // ---------------------------------------------------------------
 // UI DE NOTIFICACIONES (DOM)
+// Función simple para mostrar toasts (notificaciones temporales)
 // ---------------------------------------------------------------
 
+/**
+ * Muestra una notificación tipo toast en el contenedor `#notification-container`.
+ * - Si no existe el contenedor, la función es silenciosa (no lanza error)
+ * - El toast se autocierra tras 3 segundos
+ *
+ * @param {string} message - Texto a mostrar
+ * @param {'info'|'success'|'error'|'warning'} [type='info'] - Tipo de notificación
+ */
 export function showNotification(message, type = 'info') {
     // 1. Buscamos el contenedor que creaste en el HTML
     const container = document.getElementById('notification-container');

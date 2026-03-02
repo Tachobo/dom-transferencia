@@ -1,5 +1,6 @@
 // ---------------------------------------------------------------
 // UI DE TAREAS (DOM)
+// Contiene funciones para renderizar, editar y mostrar estado vacío
 // ---------------------------------------------------------------
 
 import { getInitials, getCurrentTimestamp } from "../utils/helpers.js";
@@ -7,13 +8,16 @@ import { showEmpty } from "./uiState.js";
 import { updateTaskApi, deleteTaskApi } from "../api/tasksApi.js";
 import { postDelete } from "../services/tasksService.js";
 
-export function updateMessageCounter(count) {
-    const counterElement = document.getElementById("messageCount");
-    if (counterElement) {
-        counterElement.textContent = `${count} ${count === 1 ? 'mensaje' : 'mensajes'}`;
-    }
-}
-
+/**
+ * Renderiza una lista de tarjetas de tarea en el contenedor indicado.
+ * - Si la lista está vacía llama a `tasksNull`
+ * - Cada tarjeta incluye botones para editar y eliminar
+ *
+ * @param {HTMLElement} container - Nodo donde inyectar las tarjetas
+ * @param {Array} tasks - Lista de tareas a renderizar
+ * @param {Object} currentUser - Usuario actual (se usa para iniciales)
+ * @returns {Array|void} Devuelve `tasks` si está vacía (comportamiento actual)
+ */
 export function renderTasks(container, tasks, currentUser, messagesFilters) {
     showEmpty(messagesFilters)
     container.innerHTML = "";
@@ -63,7 +67,14 @@ export function renderTasks(container, tasks, currentUser, messagesFilters) {
     });
 }
 
-// Función para transformar la card en formulario de edición
+/**
+ * Convierte una tarjeta en modo edición (formulario inline).
+ * - Permite cancelar o guardar los cambios (los guarda vía API)
+ * - Actualiza la UI con los datos retornados por el backend
+ *
+ * @param {HTMLElement} card - Elemento que contiene la tarjeta
+ * @param {Object} task - Objeto tarea asociado a la tarjeta
+ */
 function makeEditable(card, task) {
     const content = card.querySelector('.message-card__content');
     const originalHTML = content.innerHTML;
@@ -104,6 +115,10 @@ function makeEditable(card, task) {
     };
 }
 
+/**
+ * Muestra un estado vacío cuando no hay tareas.
+ * @param {HTMLElement} container - Nodo donde insertar el bloque vacío
+ */
 export function tasksNull(container) {
     container.innerHTML = `
     <div class="messages-empty" id="emptyState">
@@ -116,6 +131,11 @@ export function tasksNull(container) {
     `;
 }
 
+/**
+ * Resetea la UI de filtros: desmarca checkboxes y limpia el select de orden.
+ * @param {NodeList} filterStatus - Checkboxes de estados
+ * @param {HTMLSelectElement} sortTasks - Select de orden
+ */
 export function resetFiltersUI(filterStatus, sortTasks) {
 
     // desmarcar checkboxes
@@ -128,6 +148,13 @@ export function resetFiltersUI(filterStatus, sortTasks) {
 
 }
 
+/**
+ * Muestra un estado vacío en el contenedor cuando el filtro activo
+ * no tiene tareas asociadas.
+ * Reemplaza el contenido del contenedor por un mensaje informativo.
+ *
+ * @param {HTMLElement} container - Elemento donde se renderizan las tareas
+ */
 export function filterVoid(container) {
     container.innerHTML = `
     <div class="messages-empty" id="emptyState">
@@ -138,4 +165,18 @@ export function filterVoid(container) {
         <p class="messages-empty__subtext">Prueba con otro filtro o limpia la selección.</p>
     </div>
     `;
+}
+
+/**
+ * Actualiza el contador de mensajes en la interfaz.
+ * Modifica el contenido del elemento con id "messageCount"
+ * mostrando el número recibido y ajustando el texto en singular o plural.
+ *
+ * @param {number} count - Cantidad total de mensajes a mostrar
+ */
+export function updateMessageCounter(count) {
+    const counterElement = document.getElementById("messageCount");
+    if (counterElement) {
+        counterElement.textContent = `${count} ${count === 1 ? 'mensaje' : 'mensajes'}`;
+    }
 }
