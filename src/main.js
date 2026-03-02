@@ -10,7 +10,7 @@
 import { validateUserService } from "./services/userService.js";
 import { getTasksByUser, orderFilter, saveTask, validateForm } from "./services/tasksService.js";
 import { renderTasks, resetFiltersUI, tasksNull, updateMessageCounter } from "./ui/tasksUI.js";
-import { hideEmpty, hideUserUI, showUserUI } from "./ui/uiState.js";
+import { hideEmpty, hideUserUI, showEmpty, showUserUI } from "./ui/uiState.js";
 import { showNotification } from "./ui/notificationsUI.js";
 import { generateTasksJSON } from "./services/exportService.js";
 import { downloadJSONFile } from "./ui/exportUI.js";
@@ -146,6 +146,9 @@ taskForm.addEventListener("submit", async e => {
     taskTitleArea.value = ''
     taskDescriptionArea.value = ''
     taskStatusArea.value = ''
+
+    // visibilidad para la card de filtro y orden
+    showEmpty(messagesFilters)
 
     // en caso de que tenga un filtro u orden activado: 
     currentFilteredTasks = await orderFilter(filterStatus, sortTasksArea, container, currentUser)
