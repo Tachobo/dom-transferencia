@@ -7,6 +7,13 @@ import { showEmpty } from "./uiState.js";
 import { updateTaskApi, deleteTaskApi } from "../api/tasksApi.js";
 import { postDelete } from "../services/tasksService.js";
 
+export function updateMessageCounter(count) {
+    const counterElement = document.getElementById("messageCount");
+    if (counterElement) {
+        counterElement.textContent = `${count} ${count === 1 ? 'mensaje' : 'mensajes'}`;
+    }
+}
+
 export function renderTasks(container, tasks, currentUser, messagesFilters) {
     showEmpty(messagesFilters)
     container.innerHTML = "";

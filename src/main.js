@@ -4,7 +4,7 @@
 
 import { validateUserService } from "./services/userService.js";
 import { getTasksByUser, orderFilter, saveTask, validateForm } from "./services/tasksService.js";
-import { renderTasks, resetFiltersUI, tasksNull } from "./ui/tasksUI.js";
+import { renderTasks, resetFiltersUI, tasksNull, updateMessageCounter } from "./ui/tasksUI.js";
 import { hideEmpty, hideUserUI, showUserUI } from "./ui/uiState.js";
 import { showNotification } from "./ui/notificationsUI.js";
 import { generateTasksJSON } from "./services/exportService.js";
@@ -85,6 +85,10 @@ validateBtn.addEventListener("click", async () => {
         } else {
             renderTasks(container, tasksUser, currentUser, messagesFilters);
         }
+
+        //Contador de las tareas que hay al iniciar usuario
+        updateMessageCounter(tasksUser.length);
+
         showNotification(`¡Hola de nuevo, ${currentUser.name}!`, "success");
         resetFiltersUI(filterStatus, sortTasksArea)
 
