@@ -62,24 +62,3 @@ export async function deleteTaskApi(id) {
     if (!res.ok) throw new Error("No se pudo eliminar la tarea");
     return true;
 }
-        method: "PATCH", // Solo enviamos lo que cambió
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(updatedData)
-    });
-    if (!res.ok) throw new Error("No se pudo actualizar la tarea");
-    return res.json();
-}
-
-/**
- * Elimina una tarea por su ID.
- * @param {number|string} id - Identificador de la tarea
- * @returns {Promise<boolean>} true si se eliminó correctamente
- * @throws {Error} Si la respuesta HTTP no es OK
- */
-export async function deleteTaskApi(id) {
-    const res = await fetch(`http://localhost:3000/tasks/${id}`, {
-        method: "DELETE"
-    });
-    if (!res.ok) throw new Error("No se pudo eliminar la tarea");
-    return true;
-}
