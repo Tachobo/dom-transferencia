@@ -8,10 +8,20 @@
  * @param {HTMLElement} form - Contenedor del formulario de tareas
  * @param {HTMLElement} messages - Contenedor de mensajes/tareas
  */
-export function showUserUI(userInfo, form, messages) {
+export function showUserUI(userInfo, form, messages, header, footer) {
     userInfo.classList.remove("hidden");
     form.classList.remove("hidden");
     messages.classList.remove("hidden");
+    header.classList.remove("hidden");
+    footer.classList.remove("hidden");
+}
+
+export function showAdminUI(userInfo, form, header, footer, adminConsole) {
+    userInfo.classList.remove("hidden");
+    form.classList.remove("hidden");
+    header.classList.remove("hidden");
+    footer.classList.remove("hidden");
+    adminConsole.classList.remove("hidden");
 }
 
 /**
@@ -20,10 +30,12 @@ export function showUserUI(userInfo, form, messages) {
  * @param {HTMLElement} form - Contenedor del formulario de tareas
  * @param {HTMLElement} messages - Contenedor de mensajes/tareas
  */
-export function hideUserUI(userInfo, form, messages) {
+export function hideUserUI(userInfo, form, messages, header, footer) {
     userInfo.classList.add("hidden");
     form.classList.add("hidden");
     messages.classList.add("hidden");
+    header.classList.add("hidden");
+    footer.classList.add("hidden");
 }
 
 /**

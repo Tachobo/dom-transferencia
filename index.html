@@ -17,9 +17,6 @@
         </header>
 
         <!-- VALIDACION DE USUARIO -->
-
-
-
         <div id="login-wrapper" class="login-wrapper">
             <section class="validation-section validation-section--no-margin">
                 <div class="card card--login">
@@ -44,7 +41,13 @@
         <!-- MOSTRAR INFORMACION DE USUARIO  -->
         <section id="userInfo" class="validation-section hidden">
             <div class="card">
-                <h2 class="card__title">Usuario encontrado</h2>
+
+                <div id="userConfirm">
+                    <h2 class="card__title">Usuario encontrado</h2>
+                    <button id="logoutBtn" class="btn-text-logout">
+                        Cerrar Sesión
+                    </button>
+                </div>
 
                 <!-- nombre -->
                 <div class="user-info__item">
@@ -56,6 +59,12 @@
                 <div class="user-info__item">
                     <span class="user-info__label">Email:</span>
                     <span id="userEmailDisplay" class="user-info__value"></span>
+                </div>
+
+                <!-- rol -->
+                <div class="user-info__item user-info__item--rol">
+                    <span class="user-info__label">Rol:</span>
+                    <span id="userRolDisplay" class="user-info__value"></span>
                 </div>
             </div>
         </section>
@@ -76,17 +85,6 @@
                 </div>
             </div>
         </section>
-
-        <section id="admin-users-crud" class="form-section hidden">
-            <div class="card">
-                <div class="card__header-flex">
-                    <h2 class="card__title">Administración de Usuarios</h2>
-                    <button id="close-users-crud" class="btn btn--secondary btn--sm">Volver</button>
-                </div>
-                <div id="users-table-container"></div>
-            </div>
-        </section>
-
 
         <!-- FORMULARIO DE REGISTRO DE TAREAS -->
         <section id="task-section" class="form-section hidden">

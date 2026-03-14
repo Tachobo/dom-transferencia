@@ -197,7 +197,7 @@ body {
    ============================================ */
 
 .validation-section {
-    margin-bottom: var(--spacing-3xl);
+    margin-bottom: var(--spacing-xl);
 }
 
 .form-section {
@@ -627,7 +627,8 @@ body {
 
 .messages-header {
     display: flex;
-    justify-content: space-between; /* Separa el título de las acciones */
+    justify-content: space-between;
+    /* Separa el título de las acciones */
     align-items: center;
     margin-bottom: var(--spacing-md);
 }
@@ -635,7 +636,8 @@ body {
 .messages-header__actions {
     display: flex;
     align-items: center;
-    gap: 12px; /* Espacio entre el botón y el contador */
+    gap: 12px;
+    /* Espacio entre el botón y el contador */
 }
 
 /* Ajuste específico para el botón de exportar */
@@ -657,8 +659,10 @@ body {
     gap: 8px;
 }
 
-.btn-edit, .btn-delete {
-    background: #6b7280; /* Gris base */
+.btn-edit,
+.btn-delete {
+    background: #6b7280;
+    /* Gris base */
     color: white;
     border: none;
     padding: 4px 10px;
@@ -719,7 +723,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-sm);
-    pointer-events: none; /* Evita que bloquee clics en la pantalla */
+    pointer-events: none;
+    /* Evita que bloquee clics en la pantalla */
 }
 
 /* El diseño de la tarjetita del mensaje */
@@ -729,12 +734,14 @@ body {
     gap: var(--spacing-sm);
     padding: var(--spacing-md) var(--spacing-lg);
     border-radius: var(--radius-md);
-    color: var(--color-background); /* Texto blanco */
+    color: var(--color-background);
+    /* Texto blanco */
     font-weight: var(--font-weight-medium);
     font-size: var(--font-size-sm);
     box-shadow: var(--shadow-lg);
-    pointer-events: auto; /* Permite interactuar con el mensaje si es necesario */
-    
+    pointer-events: auto;
+    /* Permite interactuar con el mensaje si es necesario */
+
     /* Animación de entrada */
     animation: slideInRight var(--transition-base) ease-out;
     transition: opacity var(--transition-base) ease-out, transform var(--transition-base) ease-out;
@@ -763,6 +770,7 @@ body {
         opacity: 0;
         transform: translateX(100%);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
@@ -871,4 +879,29 @@ body {
         padding-top: var(--spacing-xl);
         overflow-y: auto;
     }
+}
+
+/* ============================================
+   BOTON DE CERRAR SECION
+   ============================================ */
+
+#userConfirm {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.btn-text-logout {
+    background: none;
+    border: none;
+    color: #333;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.2s;
+    height: 25px;
+}
+
+.btn-text-logout:hover {
+    color: #d9534f;
 }
