@@ -17,3 +17,15 @@ export async function fetchUserById(id) {
         return response.json();
     }
 }
+
+/**
+ * Obtiene TODOS los usuarios desde el endpoint `/users`.
+ * @returns {Promise<Array>} Lista completa de usuarios
+ */
+export async function fetchUsers() {
+    const response = await fetch(`http://localhost:3000/users`);
+    if (!response.ok) {
+        return [];
+    }
+    return response.json();
+}
