@@ -905,3 +905,91 @@ body {
 .btn-text-logout:hover {
     color: #d9534f;
 }
+
+/* ===========================================
+   ESTILOS DEL ADMINISTRADOR (admin.html)
+   =========================================== */
+
+.admin-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--spacing-lg) 0;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.admin-toolbar__filters {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+.table-container {
+    width: 100%;
+    overflow-x: auto; /* Permite scroll horizontal si la pantalla es pequeña */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.admin-table th {
+    background-color: var(--color-gray-100);
+    color: var(--color-gray-700);
+    padding: var(--spacing-md);
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-gray-200);
+}
+
+.admin-table td {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-gray-200);
+    color: var(--color-gray-800);
+    vertical-align: middle;
+}
+
+.admin-table tr:hover {
+    background-color: var(--color-gray-50);
+}
+
+.table-empty {
+    text-align: center;
+    padding: var(--spacing-xl) !important;
+    color: var(--color-gray-500);
+    font-style: italic;
+}
+
+/* ===========================================
+   ESTILOS PARA MODALES (Ventanas Flotantes)
+   =========================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo semitransparente oscuro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Asegura que esté por encima de todo */
+}
+
+.modal-content {
+    min-width: 400px;
+    max-width: 90%;
+    margin: 0; /* Resetea márgenes para centrar bien */
+    animation: fadeIn 0.3s ease-out; /* Una pequeña animación al aparecer */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

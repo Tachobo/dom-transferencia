@@ -87,20 +87,19 @@
   ],
   "tasks": [
     {
-      "id": "5a77",
-      "userId": "2",
-      "title": "Usuario 2",
-      "description": "Descripcion de prueba para el usuario 2",
-      "status": "en-progreso",
-      "createdAt": "2026-02-27T07:12:08.682Z"
+      "id": "9457",
+      "userId": "9",
+      "descripcion": "fdhaerh",
+      "estado": "pendiente",
+      "fecha": "14 de marzo de 2026, 16:21"
     },
     {
-      "id": "2bed",
-      "userId": "3",
-      "title": "Usuario 3",
-      "description": "Descripcion de prueba para el usuario 3",
-      "status": "pendiente",
-      "createdAt": "2026-03-03T06:25:30.654Z"
+      "id": "23a6",
+      "userId": "9",
+      "descripcion": "wetwt",
+      "estado": "pendiente",
+      "fecha": "14 de marzo de 2026, 16:22"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

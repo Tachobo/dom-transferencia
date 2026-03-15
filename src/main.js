@@ -119,7 +119,10 @@ validateBtn.addEventListener("click", async () => {
 
         } else if (currentUser.role == "admin") {
             showAdminUI(userInfo, form, header, footer, adminConsole)
-            showNotification(`¡Hola de nuevo, ${currentUser.name}!`, "success");
+            showNotification(`¡Hola de nuevo, ${currentUser.name}! Redirigiendo al panel...`, "success");
+            setTimeout(() => {
+                window.location.href = "admin.html";
+            }, 1000);
         }
 
 
@@ -241,3 +244,13 @@ btnTextLogout.addEventListener("click", () => {
         showNotification("Sesión cerrada correctamente.", "info");
     }
 });
+
+if (adminConsole) {
+    adminConsole.addEventListener("click", (e) => {
+        // Si el clic fue en un botón o tarjeta dentro de la consola de admin
+        const card = e.target.closest(".card"); // O la clase/ID que tengan tus tarjetas
+        if (card) {
+            window.location.href = "admin.html";
+        }
+    });
+}
