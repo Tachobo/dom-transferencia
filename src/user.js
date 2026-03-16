@@ -7,16 +7,13 @@
 // - Exporta las tareas visibles
 // ---------------------------------------------------------------
 
-import { validateUserService } from "./services/userService.js";
 import { getTasksByUser, orderFilter, saveTask, validateForm } from "./services/tasksService.js";
 import { renderTasks, resetFiltersUI, tasksNull, updateMessageCounter } from "./ui/tasksUI.js";
 import { hideEmpty, hideUserUI, showAdminUI, showEmpty, showUserUI } from "./ui/uiState.js";
 import { showNotification } from "./ui/notificationsUI.js";
 import { generateTasksJSON } from "./services/exportService.js";
 import { downloadJSONFile } from "./ui/exportUI.js";
-
-const validateBtn = document.getElementById("validateBtn");
-const documentoInput = document.getElementById("documento");
+import { getCurrentTimestamp } from "./utils/helpers.js";
 
 const header = document.querySelector(".header");
 const loginWrapper = document.getElementById("login-wrapper");
@@ -58,73 +55,44 @@ let currentUser = null;
 let tasksUser = []
 let currentFilteredTasks = []; //guarda lo que ve actualmente en tareas 
 
-// Al iniciar solo se ve validación
-hideUserUI(userInfo, form, messages, header, footer);
 
-// ================= VALIDAR USUARIO =================
-/**
- * Evento para validar el usuario a partir del ID ingresado.
- * - Llama a `validateUserService` para obtener datos del usuario
- * - Si existe, carga las tareas del usuario y renderiza la UI
- */
-validateBtn.addEventListener("click", async () => {
-    const document = documentoInput.value.trim();
-
-    documentoInput.value = "";
-    documentoInput.blur();
-
-    if (!document || isNaN(document)) {
-        showNotification("ID inválido. Por favor, ingresa un número.", "warning");
-        return;
-    }
-
+// ================= INICIALIZACION DEL DOCUMENTO =================
+document.addEventListener("DOMContentLoaded", async () => {
     try {
-        tasksUser = []
+        tasksUser = [];
         currentUser = null;
-        currentUser = await validateUserService(document);
 
-        if (currentUser == null) {
-            hideUserUI(userInfo, form, messages, header, footer);
-            showNotification("Usuario no registrado.", "error");
+        // Obtener el texto del localStorage
+        const sessionData = localStorage.getItem('usuarioActivo');
+
+        // Convertir el texto a Objeto
+        if (sessionData) {
+            currentUser = JSON.parse(sessionData);
+        } else {
+            // Si no hay nada, se envia a login
+            window.location.href = 'login.html';
             return;
         }
 
+        showNotification(`¡Hola de nuevo, ${currentUser.name}!`, "success");
+
         nameDisplay.textContent = currentUser.name;
         emailDisplay.textContent = currentUser.email;
+        userRolDisplay.textContent = "Usuario";
 
-        userRolDisplay.textContent = currentUser.role === "admin" ? "Administrador" : "Usuario";
+        // Traemos las tareas del usuario
+        tasksUser = await getTasksByUser(currentUser.id, container, messagesFilters);
 
-        // oculta la seccion de login
-        hideEmpty(loginWrapper)
-
-        // condicional para inicializar el rol "user"
-        if (currentUser.role == "user") {
-            // habilita la visibilidad base
-            showUserUI(userInfo, form, messages, header, footer);
-
-            tasksUser = await getTasksByUser(currentUser.id, container, messagesFilters);
-
-            if (tasksUser.length == 0) {
-                hideEmpty(messagesFilters)
-                tasksNull(container)
-            } else {
-                renderTasks(container, tasksUser, currentUser, messagesFilters);
-            }
-
-            //Contador de las tareas que hay al iniciar usuario
-            updateMessageCounter(tasksUser.length);
-
-            showNotification(`¡Hola de nuevo, ${currentUser.name}!`, "success");
-            resetFiltersUI(filterStatus, sortTasksArea)
-
-        } else if (currentUser.role == "admin") {
-            showAdminUI(userInfo, form, header, footer, adminConsole)
-            showNotification(`¡Hola de nuevo, ${currentUser.name}! Redirigiendo al panel...`, "success");
-            setTimeout(() => {
-                window.location.href = "admin.html";
-            }, 1000);
+        if (tasksUser.length == 0) {
+            hideEmpty(messagesFilters)
+            tasksNull(container)
+        } else {
+            renderTasks(container, tasksUser, currentUser, messagesFilters);
         }
 
+        updateMessageCounter(tasksUser.length);
+
+        resetFiltersUI(filterStatus, sortTasksArea)
 
     } catch (error) {
         showNotification("Usuario no encontrado en la base de datos.", "error");
@@ -157,7 +125,7 @@ taskForm.addEventListener("submit", async e => {
         title: taskTitleArea.value.trim(),
         description: taskDescriptionArea.value.trim(),
         status: taskStatusArea.value,
-        createdAt: new Date().toISOString()
+        createdAt: getCurrentTimestamp()
     };
 
     //persiste la tarea en el backend
@@ -221,31 +189,31 @@ exportTasksBtn.addEventListener("click", () => {
 
 // ================= CERRAR SESIÓN =================
 btnTextLogout.addEventListener("click", () => {
-    // Implementamos la confirmación igual que en el borrado
+    // confirmamos que desea cerrar seccion
     if (confirm("¿Estás seguro de que quieres cerrar sesión?")) {
 
-        // 1. Limpiar datos
-        currentUser = null;
-        tasksUser = [];
-        currentFilteredTasks = [];
-
-        // 2. Limpiar UI
-        container.innerHTML = "";
-        nameDisplay.textContent = "";
-        emailDisplay.textContent = "";
-        userRolDisplay.textContent = "";
-        documentoInput.value = "";
-        taskForm.reset();
-
-        // 3. Ocultar todo (Con las protecciones que preguntaste)
-        hideUserUI(userInfo, form, messages, header, footer);
-        if (adminConsole) adminConsole.classList.add("hidden");
-
-        // 4. Mostrar Login
-        showEmpty(loginWrapper);
-
-        // 5. Notificar
+        // Notificar (Se verá brevemente antes de cambiar de página)
         showNotification("Sesión cerrada correctamente.", "info");
+
+        setTimeout(() => {
+            // Limpiar datos de las variables en memoria
+            currentUser = null;
+            tasksUser = [];
+            currentFilteredTasks = [];
+
+            // Limpiar rastro en el navegador
+            localStorage.removeItem('usuarioActivo');
+
+            // Limpiar UI
+            container.innerHTML = "";
+            nameDisplay.textContent = "";
+            emailDisplay.textContent = "";
+            userRolDisplay.textContent = "";
+            taskForm.reset();
+
+            // Redireccion al login
+            window.location.href = 'index.html';
+        }, 500)
     }
 });
 

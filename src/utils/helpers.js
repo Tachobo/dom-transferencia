@@ -76,3 +76,15 @@ export const processTasks = (tasks, estados, sort, filterFn, sortFn) => {
     // Si hay criterio de orden, ordena; si no, devuelve las tareas filtradas
     return sort ? sortFn(filtered, sort) : filtered;
 };
+
+export function formatFecha(isoString) {
+    const fecha = new Date(isoString);
+
+    return fecha.toLocaleString('es-ES', {
+        day: '2-digit',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    });
+}

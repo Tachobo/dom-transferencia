@@ -4,7 +4,7 @@
 
 import { fetchTasks, createTask } from "../api/tasksApi.js";
 import { filterVoid, renderTasks, tasksNull, updateMessageCounter } from "../ui/tasksUI.js";
-import { clearError, hideEmpty, showError } from "../ui/uiState.js";
+import { clearError, hideEmpty, showEmpty, showError } from "../ui/uiState.js";
 import { getSelectedValues, isValidInput, processTasks } from "../utils/helpers.js";
 
 /**
@@ -88,23 +88,29 @@ export function validateForm(taskTitle, taskDescription, taskStatus, taskTitleEr
 
     if (!isValidInput(taskTitle.value)) {
         showError(taskTitleError, 'El título no puede estar vacío.');
+        showEmpty(taskTitleError)
         isValid = false;
     } else {
         clearError(taskTitleError);
+        hideEmpty(taskTitleError)
     }
 
     if (!isValidInput(taskDescription.value)) {
         showError(taskDescriptionError, 'La descripción no puede estar vacía.');
+        showEmpty(taskDescriptionError)
         isValid = false;
     } else {
         clearError(taskDescriptionError);
+        hideEmpty(taskDescriptionError);
     }
 
     if (!isValidInput(taskStatus.value)) {
         showError(taskStatusError, 'Debes seleccionar un estado.');
+        showEmpty(taskStatusError)
         isValid = false;
     } else {
         clearError(taskStatusError);
+        hideEmpty(taskStatusError);
     }
 
     return isValid;

@@ -4,101 +4,110 @@
       "id": "1",
       "name": "Juan Pérez",
       "email": "juan.perez@example.com",
-      "document": "1",
+      "document": 1,
       "role": "user"
     },
     {
       "id": "2",
       "name": "María Gómez",
       "email": "maria.gomez@example.com",
-      "document": "2",
+      "document": 2,
       "role": "user"
     },
     {
       "id": "3",
       "name": "Jhon Bueno",
       "email": "jhonbuenoa@example.com",
-      "document": "3",
+      "document": 3,
       "role": "user"
     },
     {
       "id": "4",
       "name": "Ana Torres",
       "email": "ana.torres@example.com",
-      "document": "4",
+      "document": 4,
       "role": "user"
     },
     {
       "id": "5",
       "name": "Luis Fernández",
       "email": "luis.fernandez@example.com",
-      "document": "5",
+      "document": 5,
       "role": "user"
     },
     {
       "id": "6",
       "name": "Sofía Martínez",
       "email": "sofia.martinez@example.com",
-      "document": "6",
+      "document": 6,
       "role": "user"
     },
     {
       "id": "7",
       "name": "Pedro López",
       "email": "pedro.lopez@example.com",
-      "document": "7",
+      "document": 7,
       "role": "user"
     },
     {
       "id": "8",
       "name": "Laura Castillo",
       "email": "laura.castillo@example.com",
-      "document": "8",
+      "document": 8,
       "role": "user"
     },
     {
       "id": "9",
       "name": "Andrés Herrera",
       "email": "andres.herrera@example.com",
-      "document": "9",
+      "document": 9,
       "role": "user"
     },
     {
       "id": "10",
       "name": "Valentina Ríos",
       "email": "valentina.rios@example.com",
-      "document": "10",
+      "document": 10,
       "role": "user"
     },
     {
       "id": "11",
       "name": "Admin Principal",
       "email": "admin.uno@example.com",
-      "document": "100",
+      "document": 100,
       "role": "admin"
     },
     {
       "id": "12",
       "name": "Admin Secundario",
       "email": "admin.dos@example.com",
-      "document": "101",
+      "document": 101,
+      "role": "admin"
+    },
+    {
+      "id": "23",
+      "name": "Don Admin",
+      "email": "pedro.lopez@example.com",
+      "document": 12,
       "role": "admin"
     }
   ],
   "tasks": [
     {
-      "id": "9457",
-      "userId": "9",
-      "descripcion": "fdhaerh",
-      "estado": "pendiente",
-      "fecha": "14 de marzo de 2026, 16:21"
+      "id": "680b",
+      "userId": "2",
+      "title": "as",
+      "description": "das",
+      "status": "pendiente",
+      "createdAt": "16 de marzo de 2026, 09:52"
     },
     {
-      "id": "23a6",
-      "userId": "9",
-      "descripcion": "wetwt",
-      "estado": "pendiente",
-      "fecha": "14 de marzo de 2026, 16:22"
+      "id": "0cdf",
+      "userId": "2",
+      "title": "sa",
+      "description": "fasd",
+      "status": "en-progreso",
+      "createdAt": "16 de marzo de 2026, 09:52"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

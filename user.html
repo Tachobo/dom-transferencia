@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Mensajes - Ejercicio DOM</title>
+    <link rel="stylesheet" href="src/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- ENCABEZADO PRINCIPAL  -->
+        <header class="header">
+            <h1 class="header__title">Registro de Tareas</h1>
+            <p class="header__subtitle">Practica la manipulación del DOM en tiempo real</p>
+        </header>
+
+        <!-- MOSTRAR INFORMACION DE USUARIO  -->
+        <section id="userInfo" class="validation-section">
+            <div class="card">
+
+                <div id="userConfirm">
+                    <h2 class="card__title">¡Te damos la bienvenida!</h2>
+                    <button id="logoutBtn" class="btn-text-logout">
+                        Cerrar Sesión
+                    </button>
+                </div>
+
+                <!-- nombre -->
+                <div class="user-info__item">
+                    <span class="user-info__label">Nombre:</span>
+                    <span id="userNameDisplay" class="user-info__value"></span>
+                </div>
+
+                <!-- email -->
+                <div class="user-info__item">
+                    <span class="user-info__label">Email:</span>
+                    <span id="userEmailDisplay" class="user-info__value"></span>
+                </div>
+
+                <!-- rol -->
+                <div class="user-info__item user-info__item--rol">
+                    <span class="user-info__label">Rol:</span>
+                    <span id="userRolDisplay" class="user-info__value"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- FORMULARIO DE REGISTRO DE TAREAS -->
+        <section id="task-section" class="form-section">
+            <div class="card">
+                <h2 class="card__title">Registrar Nueva Tarea</h2>
+
+                <form id="taskForm" class="form" novalidate>
+                    <!-- Título de la tarea -->
+                    <div class="form__group">
+                        <label for="taskTitle" class="form__label">Título de la tarea</label>
+                        <input type="text" id="taskTitleArea" class="form__input" placeholder="Ingresa el titulo..."
+                            aria-required="true">
+                        <span class="form__error" id="taskTitleError"></span>
+                    </div>
+
+                    <!-- Descripción de la tarea -->
+                    <div class="form__group">
+                        <label for="taskDescription" class="form__label">Descripción</label>
+                        <textarea id="taskDescriptionArea" class="form__input form__textarea"
+                            placeholder="Describe la tarea en detalle..." rows="4" aria-required="true"></textarea>
+                        <span class="form__error" id="taskDescriptionError"></span>
+                    </div>
+
+                    <!-- Estado de la tarea -->
+                    <div class="form__group">
+                        <label for="taskStatus" class="form__label">Estado</label>
+                        <select id="taskStatusArea" class="form__input" aria-required="true">
+                            <option value="">Selecciona un estado</option>
+                            <option value="pendiente">Pendiente</option>
+                            <option value="en-progreso">En progreso</option>
+                            <option value="completada">Completada</option>
+                        </select>
+                        <span class="form__error" id="taskStatusError"></span>
+                    </div>
+
+                    <!-- Botón de envío -->
+                    <button type="submit" class="btn btn--primary" id="btn--primary">
+                        <span class="btn__text">Agregar Tarea</span>
+                        <span class="btn__icon">➤</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- AREA DE MENSAJES -->
+        <section id="messages-section" class="messages-section">
+            <!-- numero de mensajes publicados -->
+            <div class="messages-header">
+                <h2 class="messages-header__title">Mensajes Publicados</h2>
+
+                <div class="messages-header__actions">
+                    <button id="exportTasksBtn" class="btn btn--primary btn--sm">
+                        Exportar tareas
+                    </button>
+                    <span class="messages-header__count" id="messageCount">0 mensajes</span>
+                </div>
+            </div>
+
+            <div class="messages-controls">
+
+
+                <!-- Filtro de tareas -->
+                <div id="messagesFilters" class="messages-filters message-card hidden">
+                    <h2 class="filters-title">Filtra y ordena</h2>
+                    <!-- Filtro por estado (MULTIPLE) -->
+                    <div class="form__group">
+                        <span class="form__label form__input--font-size">Filtrar por estado</span>
+
+                        <div class="checkbox-group" id="filterStatusGroup">
+
+                            <label for="statusPendiente">
+                                <input id="statusPendiente" type="checkbox" value="pendiente" class="filterStatus">
+                                Pendiente
+                            </label>
+
+                            <label for="statusProgreso">
+                                <input id="statusProgreso" type="checkbox" value="en-progreso" class="filterStatus">
+                                En progreso
+                            </label>
+
+                            <label for="statusCompletada">
+                                <input id="statusCompletada" type="checkbox" value="completada" class="filterStatus">
+                                Completada
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- Ordenamiento claro -->
+                    <div class="form__group">
+                        <label for="sortTasks" class="form__label">Ordenar tareas</label>
+
+                        <select id="sortTasks" class="form__input">
+                            <option value="">Sin orden</option>
+
+                            <optgroup label="Por fecha">
+                                <option value="fecha_desc">Más recientes primero</option>
+                                <option value="fecha_asc">Más antiguas primero</option>
+                            </optgroup>
+
+                            <optgroup label="Por titulo">
+                                <option value="nombre_asc">A → Z</option>
+                                <option value="nombre_desc">Z → A</option>
+                            </optgroup>
+
+                            <optgroup label="Por estado">
+                                <option value="estado_prioridad">Pendientes primero</option>
+                                <option value="estado_inverso">Completadas primero</option>
+                            </optgroup>
+
+                        </select>
+                    </div>
+
+                    <div class="btn btn-filters-actions">
+                        <button id="applyFiltersBtn" class="btn btn--primary">
+                            Aplicar filtros
+                        </button>
+                    </div>
+
+                </div>
+                <!-- zona de mensajes publicados -->
+                <div id="messagesContainer" class="messages-container">
+                    <!-- Los mensajes se agregarán aquí dinámicamente -->
+                    <div class="messages-empty" id="emptyState">
+                        <!-- En caso de no tener tareas registradas, se anunciara aqui -->
+                    </div>
+                </div>
+        </section>
+
+        <!-- FOOTER INFORMATIVO -->
+        <footer class="footer">
+            <p class="footer__text">Ejercicio de manipulación del DOM | SENA - Desarrollo Web</p>
+        </footer>
+    </div>
+
+    <!-- AREA DE NOTIFICACIONES ENTRANTES -->
+    <div id="notification-container" class="notification-container"></div>
+
+    <!-- ENLAZAR EL CODIGO -->
+    <script src="/src/user.js" type="module"></script>
+</body>
+
+</html>

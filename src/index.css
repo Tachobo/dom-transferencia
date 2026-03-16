@@ -1,0 +1,64 @@
+/* ============================================
+   MÓDULO DE LOGIN 
+   ============================================ */
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.form__group--no-margin {
+    margin-bottom: 0px;
+    margin-top: 25px;
+}
+
+header.login-header {
+    margin-bottom: 30px;
+}
+
+.form__input {
+    text-align: center;
+}
+
+.card--login {
+    min-width: 496px;
+    width: 100%;
+    text-align: center;
+    padding: var(--spacing-3xl) var(--spacing-2xl) !important;
+}
+
+.login-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.card__subtitle {
+    margin-bottom: var(--spacing-md);
+    color: var(--color-text-secondary);
+}
+
+.btn--full {
+    width: 100%;
+    margin-top: -10px;
+}
+
+/* ============================================
+   UTILIDADES Y RESPONSIVE
+   ============================================ */
+.validation-section--no-margin {
+    margin: 0;
+}
+
+@media (max-height: 500px) {
+    .login-wrapper {
+        align-items: flex-start;
+        padding-top: var(--spacing-xl);
+        overflow-y: auto;
+    }
+}

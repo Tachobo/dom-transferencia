@@ -3,7 +3,7 @@
 // Contiene funciones para renderizar, editar y mostrar estado vacío
 // ---------------------------------------------------------------
 
-import { getInitials, getCurrentTimestamp } from "../utils/helpers.js";
+import { getInitials, getCurrentTimestamp, formatFecha } from "../utils/helpers.js";
 import { showEmpty } from "./uiState.js";
 import { updateTaskApi, deleteTaskApi } from "../api/tasksApi.js";
 import { postDelete } from "../services/tasksService.js";
@@ -39,7 +39,7 @@ export function renderTasks(container, tasks, currentUser, messagesFilters) {
                 <div class="message-card__avatar">${getInitials(currentUser.name)}</div>
                 <span class="message-card__username">${task.title}</span>
             </div>
-            <span class="message-card__timestamp">${getCurrentTimestamp()}</span>
+            <span class="message-card__timestamp">${task.createdAt}</span>
             <div class="task-btns">
                 <button class="btn-edit">Editar</button>
                 <button class="btn-delete">Eliminar</button>
