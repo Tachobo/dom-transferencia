@@ -129,38 +129,6 @@
             </section>
 
             <!-- FORMULARIO DE REGISTRO DE TAREAS -->
-            <!-- <div id="modalNewGlobalTask" class="modal-overlay hidden">
-                <div class="card card--login modal-content">
-                    <h2 class="card__title">Asignar Nueva Tarea</h2>
-                    <p class="card__subtitle">Crea una tarea para cualquier usuario</p>
-
-                    <form id="formNewGlobalTask" style="text-align: left;">
-                        <div class="form__group">
-                            <label for="globalTaskUser"
-                                style="display: block; margin-bottom: 5px; color: var(--color-gray-700); font-weight: bold;">Asignar
-                                a:</label>
-                            <select id="globalTaskUser" class="form__input" required>
-                                <option value="">Selecciona un usuario...</option>
-                            </select>
-                        </div>
-
-                        <div class="form__group">
-                            <label for="globalTaskDesc"
-                                style="display: block; margin-bottom: 5px; color: var(--color-gray-700); font-weight: bold;">Descripción:</label>
-                            <textarea id="globalTaskDesc" class="form__input" rows="3"
-                                placeholder="Escribe la tarea aquí..." required></textarea>
-                        </div>
-
-                        <div style="display: flex; gap: 10px; margin-top: 20px;">
-                            <button type="button" id="btnCancelGlobalTask" class="btn"
-                                style="flex: 1; background-color: var(--color-gray-200); color: var(--color-text-primary);">Cancelar</button>
-                            <button type="submit" class="btn btn--primary" style="flex: 1;">Asignar Tarea</button>
-                        </div>
-                    </form>
-                </div>
-            </div> -->
-
-            <!-- FORMULARIO DE REGISTRO DE TAREAS -->
             <div id="task-section" class="modal-overlay hidden">
                 <div class="card modal-content">
 
@@ -184,7 +152,24 @@
                                     aria-required="true"></textarea>
                                 <span class="form__error hidden" id="taskDescriptionError"></span>
                             </div>
-
+                            
+                            <!-- Seleccion de usuarios para asignacion de tareas Tachobo-->
+                            <div class="form__group">
+                                <label class="form__label">Asignar a:</label>
+    
+                            <div id="userSelectionContainer" style="max-height: 200px; overflow-y: auto; border: 1px solid var(--color-gray-200); padding: 10px; border-radius: 8px; background-color: #f9f9f9; border: 1px solid #ccc;">
+                                <label style="display: flex; align-items: center; gap: 8px; font-weight: bold; border-bottom: 1px solid #ddd; padding-bottom: 8px; margin-bottom: 8px; cursor: pointer;">
+                                    <input type="checkbox" id="selectAllUsers"> 
+                                    <span>Seleccionar todos</span>
+                                </label>
+                                
+                                <div id="individualUsersList">
+                                    <p style="font-size: 0.9rem; color: #666; font-style: italic;">Cargando lista de usuarios...</p>
+                                </div>
+                            </div>
+                                <span class="form__error hidden" id="userSelectionError" style="color: var(--color-danger); font-size: 0.8rem;">Debes seleccionar al menos un usuario</span>
+                            </div>
+                            
                             <!-- Estado de la tarea -->
                             <div class="form__group">
                                 <label for="taskStatus" class="form__label">Estado</label>
